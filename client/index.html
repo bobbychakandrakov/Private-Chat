@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="chatApp">
+<head>
+	<title>Private Chat Room</title>
+	<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+</head>
+<body>
+	<div class="container jumbotron" ng-controller="ChatController">
+		<h1>{{name}}</h1>
+	</div>
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+	<script type="text/javascript" src="bower_components/angular-websocket/dist/angular-websocket.js"></script>
+	<script type="text/javascript">
+		var app = angular.module('chatApp',['ngWebSocket']);
+		app.controller('ChatController',['$scope', '$websocket' ,function  ($scope, $websocket) {
+			
+		}]);
+	</script>
+</body>
+</html>
