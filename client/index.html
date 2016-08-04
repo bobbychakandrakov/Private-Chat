@@ -6,15 +6,53 @@
 </head>
 <body>
 	<div class="container jumbotron" ng-controller="ChatController">
-		<h1>{{name}}</h1>
+		<ul ng-repeat="message1 in messages track by $index">
+			<li>{{message1}}</li>
+		</ul>
+		<div class="form-group">
+		<form ng-submit="sendMessage()">
+		  <label for="tkn">Token:</label>
+		  <input type="text" class="form-control" id="tkn" ng-model="token">
+		  <label for="msg">Message:</label>
+		  <input type="text" class="form-control" id="msg" ng-model="message">
+		  <br>
+		  <button class="btn btn-danger" type="submit">Send</button>
+		</form>
+		</div>
 	</div>
 	<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script type="text/javascript" src="bower_components/angular-websocket/dist/angular-websocket.js"></script>
 	<script type="text/javascript">
 		var app = angular.module('chatApp',['ngWebSocket']);
-		app.controller('ChatController',['$scope', '$websocket' ,function  ($scope, $websocket) {
-			
+		app.controller('ChatController',['$scope', 'chatService', function  ($scope, chatService) {
+
+			$scope.messages = [];
+
+			$scope.sendMessage = sendMessage;
+
+
+			function sendMessage () {
+				$scope.messages.push($scope.message);
+				sessionStorage.setItem('token', $scope.token);
+				chatService.sendMessage();
+			}
+		}]);
+		app.factory('chatService', ['$http', '$q', '$websocket', function  ($http, $q, $websocket) {
+
+			return {
+				sendMessage: sendMessage,
+				getMessages: getMessages
+			}
+
+			function  sendMessage (message) {
+				
+			}
+
+			function  getMessages () {
+				
+			}
+
 		}]);
 	</script>
 </body>
